@@ -18,6 +18,7 @@ require 'components/header.general.php';
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <th>N°</th>
                     <th>Pregunta</th>
                     <th>Servicio</th>
                     <th>Nivel</th>
@@ -27,13 +28,14 @@ require 'components/header.general.php';
                   </thead>
                   <tbody>
                     <?php
-                      $query = "SELECT * FROM `inventalogame_preguntas` ip INNER JOIN inventalogame_servicios ise ON ip.pre_varchar_servicio=ise.ser_int_id INNER JOIN inventalogame_niveles inv ON ip.niv_int_id=inv.niv_int_id INNER JOIN inventalogame_asignaturas ia ON ip.asi_int_id=ia.asi_int_id";
+                      $query = "SELECT * FROM `inventalogame_preguntas` ip INNER JOIN inventalogame_servicios ise ON ip.pre_varchar_servicio=ise.ser_int_id INNER JOIN inventalogame_niveles inv ON ip.niv_int_id=inv.niv_int_id INNER JOIN inventalogame_asignaturas ia ON ip.asi_int_id=ia.asi_int_id ORDER BY pre_int_id DESC";
                       require 'config.php';                    
                       $result_tasks = mysqli_query($mysqli, $query);
                       $contador=1;
                       while($row = mysqli_fetch_assoc($result_tasks)) {
                     ?>
                   <tr>
+                    <td><?php echo $contador;?></td>
                     <td><?php echo $row['pre_txt_preguntas']; ?></td>
                     <td><?php echo $row['ser_varchar_servicio']; ?></td>
                     <td><?php echo $row['niv_varchar_nivel']; ?></td>
@@ -87,7 +89,10 @@ require 'components/header.general.php';
             "infoFiltered": "(filtered from _MAX_ total records)"},
       
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+      "ordering": false,
+      "pageLength": 50
+
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
