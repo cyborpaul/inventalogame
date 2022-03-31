@@ -33,7 +33,7 @@ require 'components/header.general.php';
                   <tr>
                     <td><?php echo $row['asi_varchar_asignatura']; ?></td>
                     <td><?php echo $row['asi_txt_descripcion']; ?></td>
-                    <td>Ver</td>
+                    <td><a href="editar_asignatura.php?id=<?php echo $row['asi_int_id']; ?>">Editar</a></td>
                   </tr>
                   <?php $contador++;} ?>
                   
