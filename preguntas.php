@@ -91,7 +91,7 @@ require 'components/header.general.php';
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "ordering": false,
-      "pageLength": 50
+      "pageLength": 500
 
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
