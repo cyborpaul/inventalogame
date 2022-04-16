@@ -9,6 +9,7 @@ require 'components/header.general.php';
                 <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                 <h3 class="card-title">Gestor banco de preguntas</h3>
+                  <a href="preguntasregister.php"><button class="btn btn-success">Ingresar nuevas preguntas por excel <i class="bx bx-plus nav_icon"></i></button></a>
                   <a href="preguntasregister.php"><button class="btn btn-success">Ingresar nuevas preguntas <i class="bx bx-plus nav_icon"></i></button></a>
                 </div>
                 
