@@ -2,6 +2,7 @@
 require_once('modelo.php');
 
 class usuario extends modelo{
+    protected $id;
     protected $mail;
 	protected $name;
 	protected $lastname;
@@ -27,5 +28,33 @@ class usuario extends modelo{
         }
 
     }
+
+    public function editar($mail, $name, $lastname, $nickname, $passcifrada, $rol, $id){
+        $sql="UPDATE `sanmarcos_usuarios` SET `usu_txt_email`='$mail',`usu_txt_name`='$name',`usu_txt_lastname`='$lastname',`usu_txt_nickname`='$nickname',`usu_txt_password`='$password',`usu_txt_rol`='$rol' WHERE usu_int_id='$id'";
+        $resultado=$this->mysqli->query($sql);
+        if(!$resultado){
+            echo "Fallo en el registro del usuario";
+
+        }else{
+            return $resultado;
+            $resultado->close();
+            $this->mysqli->close();
+        }
+    }
+
+    public function eliminar($id){
+        $sql="DELETE FROM `sanmarcos_usuarios` WHERE usu_int_id='$id'"; 
+        $resultado=$this->mysqli->query($sql);
+        if(!$resultado){
+            echo "Fallo en el registro del usuario";
+
+        }else{
+            return $resultado;
+            $resultado->close();
+            $this->mysqli->close();
+        }        
+    }
+
+    
 }
 ?>

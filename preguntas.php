@@ -16,6 +16,7 @@ require 'components/header.general.php';
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <a href="exportar.php" class="btn btn-success">Exportar CSV</a>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -87,14 +88,12 @@ require 'components/header.general.php';
             "zeroRecords": "Nothing found - sorry",
             "info": "Resultados _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)"},
-      
+            "infoFiltered": "(filtered from _MAX_ total records)"},      
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
       "ordering": false,
       "pageLength": 500
 
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    }).buttons().container().appendTo('#example1_wrapper .col-md-12:eq(0)');
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
