@@ -16,7 +16,7 @@ $tamanio    = $_FILES['dataCliente']['size'];
 $archivotmp = $_FILES['dataCliente']['tmp_name'];
 $lineas     = file($archivotmp);
 
-$i = 1;
+$i = 0;
 
 foreach ($lineas as $linea) {
     $cantidad_registros = count($lineas);
@@ -26,7 +26,24 @@ foreach ($lineas as $linea) {
 
         $datos = explode(";", $linea);
 
-        $pregunta=  utf8_encode($datos[0]);
+        //INICIO ENCRIPTAR
+
+        $string=utf8_encode($datos[0]);
+        $key= "qwertyuiopasdfghjklñzxcvbnm";
+        $result = '';
+        for($j=0; $j<strlen($string); $j++) {
+           $char = substr($string, $j, 1);
+           $keychar = substr($key, ($j % strlen($key))-1, 1);
+           $char = chr(ord($char)+ord($keychar));
+           $result.=$char;
+        }
+        $nombre=base64_encode($result);
+
+        //FIN ENCRIPTAR
+
+
+
+        $pregunta=  utf8_encode($nombre);
         $servicio=  !empty($datos[1])  ? ($datos[1]) : '';
         $nivel=     !empty($datos[2])  ? ($datos[2]) : '';
         $asignatura=!empty($datos[3])  ? ($datos[3]) : '';
@@ -35,13 +52,25 @@ foreach ($lineas as $linea) {
         $optionc=   utf8_encode($datos[6]);
         $optiond=   utf8_encode($datos[7]);
         $optione=   utf8_encode($datos[8]);
-        $respuesta= utf8_encode($datos[9]);
+        $respuesta= !empty(utf8_encode($datos[9]))  ? (utf8_encode($datos[9])) : '';
+        //INICIO ENCRIPTAR 2
+        $pass=$respuesta;
+        $key= "qwertyuiopasdfghjklñzxcvbnm";
+        $res = '';
+        for($j=0; $j<strlen($pass); $j++) {
+           $char = substr($pass, $j, 1);
+           $keychar = substr($key, ($j % strlen($key))-1, 1);
+           $char = chr(ord($char)+ord($keychar));
+           $res.=$char;
+        }
+        $password=base64_encode($res);        
+        //FIN ENCRIPTAR 2
        
-    $insertar = "INSERT INTO `inventalogame_preguntas`(`pre_txt_preguntas`, `pre_varchar_servicio`, `niv_int_id`, `asi_int_id`, `pre_varchar_optiona`, `pre_varchar_optionb`, `pre_varchar_optionc`, `pre_varchar_optiond`, `pre_varchar_optione`, `pre_varchar_respuesta`) VALUES ('$pregunta','$servicio','$nivel','$asignatura','$optiona','$optionb','$optionc','$optiond','$optione','$respuesta')";
+    $insertar = "INSERT INTO `inventalogame_prueba`(`pre_txt_preguntas`, `pre_varchar_servicio`, `niv_int_id`, `asi_int_id`, `pre_varchar_optiona`, `pre_varchar_optionb`, `pre_varchar_optionc`, `pre_varchar_optiond`, `pre_varchar_optione`, `pre_varchar_respuesta`) VALUES ('$pregunta','$servicio','$nivel','$asignatura','$optiona','$optionb','$optionc','$optiond','$optione','$password')";
         mysqli_query($mysqli, $insertar);
     }
 
-      echo '<div>'. $i. "). " .$linea.'</div>';
+      echo '<div>'. $i. "). " .utf8_encode($linea).'</div>';
     $i++;
 }
 
