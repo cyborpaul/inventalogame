@@ -66,7 +66,7 @@ foreach ($lineas as $linea) {
         $password=base64_encode($res);        
         //FIN ENCRIPTAR 2
        
-    $insertar = "INSERT INTO `inventalogame_prueba`(`pre_txt_preguntas`, `pre_varchar_servicio`, `niv_int_id`, `asi_int_id`, `pre_varchar_optiona`, `pre_varchar_optionb`, `pre_varchar_optionc`, `pre_varchar_optiond`, `pre_varchar_optione`, `pre_varchar_respuesta`) VALUES ('$pregunta','$servicio','$nivel','$asignatura','$optiona','$optionb','$optionc','$optiond','$optione','$password')";
+    $insertar = "INSERT INTO `inventalogame_preguntas`(`pre_txt_preguntas`, `pre_varchar_servicio`, `niv_int_id`, `asi_int_id`, `pre_varchar_optiona`, `pre_varchar_optionb`, `pre_varchar_optionc`, `pre_varchar_optiond`, `pre_varchar_optione`, `pre_varchar_respuesta`) VALUES ('$pregunta','$servicio','$nivel','$asignatura','$optiona','$optionb','$optionc','$optiond','$optione','$password')";
         mysqli_query($mysqli, $insertar);
     }
 
